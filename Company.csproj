@@ -49,6 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreditList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreditList.Designer.cs">
+      <DependentUpon>CreditList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CreditListInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreditListInput.Designer.cs">
+      <DependentUpon>CreditListInput.cs</DependentUpon>
+    </Compile>
     <Compile Include="DailyDataDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +93,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CreditList.resx">
+      <DependentUpon>CreditList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreditListInput.resx">
+      <DependentUpon>CreditListInput.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DailyDataDetail.resx">
       <DependentUpon>DailyDataDetail.cs</DependentUpon>
     </EmbeddedResource>

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace Company
@@ -81,27 +82,7 @@ namespace Company
                 int itemCost = Convert.ToInt32(tbSpendCost.Text);
                 string status = rbDebit.Checked ? "Debit" : "Credit";
 
-                // Create a new SubItem object
-                Spend newItem = new Spend
-                {
-                    name = customerName,
-                    item = itemName,
-                    cost = itemCost,
-                    status = status
-                };
-
-                // Add the new item to the linked list
-                spend.AddLast(newItem);
-
-                // Add the new item to the ListBox
-                if (newItem.status == "Debit")
-                {
-                    DebitList.Items.Add($"{newItem.cost} - {newItem.item} : {newItem.name}");
-                }
-                else
-                {
-                    CreditList.Items.Add($"{newItem.cost} - {newItem.item} : {newItem.name}");
-                }
+                addSpend(customerName, itemName, itemCost, status);
 
                 // Clear input fields for convenience
                 tbSpendName.Clear();
@@ -114,6 +95,39 @@ namespace Company
                 MessageBox.Show("Please enter valid inputs for the name and cost.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        public void addSpend(string customerName, string itemName, int itemCost, string status)
+        {
+            // Create a new SubItem object
+            Spend newItem = new Spend
+            {
+                name = customerName,
+                item = itemName,
+                cost = itemCost,
+                status = status
+            };
+
+            // Add the new item to the linked list
+            spend.AddLast(newItem);
+
+            // Add the new item to the ListBox
+            if (newItem.status == "Debit")
+            {
+                DebitList.Items.Add($"{newItem.cost} - {newItem.item} : {newItem.name}");
+            }
+            else
+            {
+                CreditList.Items.Add($"{newItem.cost} - {newItem.item} : {newItem.name}");
+            }   
+        }
+
+        // Call Credit List Form
+        private void btnCreToDeb_Click(object sender, EventArgs e)
+        {
+            CreditListInput creditList = new CreditListInput(this);
+            creditList.ShowDialog();
+        }
+
         // Clear Spend
         private void btnSpendClear_Click(object sender, EventArgs e)
         {
@@ -222,62 +236,7 @@ namespace Company
             }
         }
         // Credit To Debit
-        private void btnCreToDeb_Click(object sender, EventArgs e)
-        {
-            if (CreditList.SelectedItem != null)
-            {
-                // Get the selected item's text
-                string selectedItemText = CreditList.SelectedItem.ToString();
-
-                // Parse the name, cost and item from the selected item's text
-                string[] parts = selectedItemText.Split('-', ':');
-                if (parts.Length == 3)
-                {
-                    try
-                    {
-                        int selectedCost = int.Parse(parts[0].Trim());
-                        string selectedItem = parts[1].Trim();
-                        string selectedName = parts[2].Trim();
-
-                        // Find the corresponding subItem in the LinkedList
-                        Spend itemToDebit = null;
-                        foreach (var item in spend)
-                        {
-                            if (item.cost == selectedCost && item.name == selectedName && item.item == selectedItem)
-                            {
-                                item.status = "Debit";
-                                itemToDebit = item;
-                                break;
-                            }
-                        }
-
-                        // Remove the item from the LinkedList and ListBox if found
-                        if (itemToDebit != null)
-                        {
-                            DebitList.Items.Add(CreditList.SelectedItem);
-                            CreditList.Items.Remove(CreditList.SelectedItem); // Remove from ListBox
-                            MessageBox.Show("Item Added to Debit List.");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Item not found in the linked list.");
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"An error occurred: {ex.Message}");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Invalid item format in the ListBox.");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select an item to delete.");
-            }
-        }
+       
 
 
         // Add Recive

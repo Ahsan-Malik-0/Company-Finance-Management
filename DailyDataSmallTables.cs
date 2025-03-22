@@ -32,7 +32,8 @@ namespace Company
             switch (ColumnIndex)
             {
                 case 2:
-                    string reciveQuery = @"SELECT name AS [Name], item AS [Item], cost AS [Cost] FROM Recives where dailyRecordId = @dailyDataId";
+                    string reciveQuery = @"SELECT name AS [Name], item AS [Item], cost AS [Cost] FROM 
+                                         Recives where dailyRecordId = @dailyDataId";
                     SqlCommand reciveCmd = new SqlCommand(reciveQuery, conn);
                     reciveCmd.Parameters.AddWithValue("dailyDataid", DailyDataId);
                     SqlDataAdapter reciveCmdDataAdapter = new SqlDataAdapter(reciveCmd);
@@ -51,7 +52,8 @@ namespace Company
 
 
                 case 3:
-                    string spendQuery = @"SELECT name AS [Name], item AS [Item], cost AS [Cost], status AS [status] FROM Spends where dailyRecordId = @dailyDataId";
+                    string spendQuery = @"SELECT name AS [Name], item AS [Item], cost AS [Cost], status AS [status] 
+                                        FROM Spends where dailyRecordId = @dailyDataId";
                     SqlCommand spendCmd = new SqlCommand(spendQuery, conn);
                     spendCmd.Parameters.AddWithValue("dailyDataid", DailyDataId);
                     SqlDataAdapter spendCmdDataAdapter = new SqlDataAdapter(spendCmd);
@@ -70,7 +72,8 @@ namespace Company
 
 
                 case 4:
-                    string otherQuery = @"SELECT name AS [Name], item AS [Item], cost AS [Cost] FROM Others where dailyRecordId = @dailyDataId";
+                    string otherQuery = @"SELECT name AS [Name], item AS [Item], cost AS [Cost] FROM 
+                                        Others where dailyRecordId = @dailyDataId";
                     SqlCommand otherCmd = new SqlCommand(otherQuery, conn);
                     otherCmd.Parameters.AddWithValue("dailyDataid", DailyDataId);
                     SqlDataAdapter otherCmdDataAdapter = new SqlDataAdapter(otherCmd);

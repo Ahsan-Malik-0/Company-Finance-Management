@@ -168,16 +168,10 @@ SELECT TOP 1 month
 FROM DailyRecords
 ORDER BY id DESC;
 
-SELECT SUM(Recives.cost) AS Cost
-FROM Recives
-JOIN DailyRecords ON DailyRecords.id = Recives.DailyRecordId
-where DailyRecords.month = 1
-
-SELECT *
-FROM Recives
-JOIN DailyRecords ON DailyRecords.id = Recives.DailyRecordId
-where DailyRecords.month = 1
-ORDER BY DailyRecords.date
+SELECT SUM(Spends.cost) AS Cost
+FROM Spends
+--JOIN DailyRecords ON DailyRecords.id = Recives.DailyRecordId
+where Spends.status = 'Credit'
 
 
 SELECT *
@@ -186,4 +180,14 @@ JOIN DailyRecords ON DailyRecords.id = Recives.DailyRecordId
 where DailyRecords.month = 1
 ORDER BY DailyRecords.date
 
-2 17 Spirit 1000
+
+SELECT *
+FROM Recives
+JOIN DailyRecords ON DailyRecords.id = Recives.DailyRecordId
+where DailyRecords.month = 1
+ORDER BY DailyRecords.date
+
+SELECT * FROM Spends WHERE status = 'Credit' AND item LIKE 'plate%'
+SELECT SUM(cost) AS [HARIS] FROM Spends WHERE status = 'Credit' AND item LIKE 'plate%'
+SELECT SUM(cost) AS [Bhatti] FROM Spends WHERE status = 'Credit' AND (item LIKE 'Business Card%' OR item LIKE 'Printing')
+SELECT SUM(cost) AS [Rashid] FROM Spends WHERE status = 'Credit' AND (item LIKE 'Flex%' OR item LIKE 'Standies')

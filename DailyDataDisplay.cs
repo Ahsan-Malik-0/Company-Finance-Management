@@ -229,5 +229,11 @@ namespace Company
         {
             DisplayData();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CreditList creditList = new CreditList();
+            creditList.ShowDialog();
+        }
     }
 }
